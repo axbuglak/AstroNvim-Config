@@ -1,25 +1,17 @@
 return {
-  {
+  "jay-babu/mason-nvim-dap.nvim",
+  event = "VeryLazy",
+  dependencies = {
     "williamboman/mason.nvim",
-    cmd = {
-      "Mason",
-      "MasonInstall",
-      "MasonUninstall",
-      "MasonUninstallAll",
-      "MasonLog",
-      "MasonUpdate", -- AstroNvim extension here as well
-      "MasonUpdateAll", -- AstroNvim specific
+    "mfussenegger/nvim-dap",
+  },
+
+  opts = {
+    ensure_installed = {
+      "codelldb",
+      "python",
+      "bash",
     },
-    opts = {
-      ui = {
-        icons = {
-          package_installed = "✓",
-          package_uninstalled = "✗",
-          package_pending = "⟳",
-        },
-      },
-    },
-    build = ":MasonUpdate",
-    config = require "plugins.configs.mason",
+    handlers = {},
   },
 }
