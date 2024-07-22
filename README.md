@@ -15,3 +15,4 @@ git clone https://github.com/AstroNvim/AstroNvim ~/.config/nvim
 git clone https://github.com/axbuglak/astronvim-config ~/.config/nvim/lua/user
 ```
 
+### Change branch to `config`
