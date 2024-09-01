@@ -1,5 +1,6 @@
 return {
   colorscheme = "catppuccin",
+  -- colorscheme = "astroui",
   icons = {
     ActiveLSP = "",
     ActiveTS = "",

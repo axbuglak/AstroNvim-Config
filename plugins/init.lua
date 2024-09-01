@@ -6,7 +6,19 @@ return {
   { "lvimuser/lsp-inlayhints.nvim", config = true },
   -- using lazy.nvim
   -- { "AstroNvim/astrotheme", commit = "7a52efdd9a5bd302445d284a424467f92e4b1d44" },
-
+  {
+    'Exafunction/codeium.vim',
+    event = 'BufEnter',
+    config = function()
+      -- Accept the current suggestion with Option + Tab
+      vim.keymap.set('i', '<C-g>', function() return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
+      vim.keymap.set('i', '<c-;>', function() return vim.fn['codeium#CycleCompletions'](1) end,
+        { expr = true, silent = true })
+      vim.keymap.set('i', '<c-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end,
+        { expr = true, silent = true })
+      vim.keymap.set('i', '<c-x>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
+    end,
+  },
   {
     "rebelot/heirline.nvim",
     opts = function(_, opts)
@@ -33,7 +45,7 @@ return {
           { provider = "" },
           -- define the surrounding separator and colors to be used inside of the component
           -- and the color to the right of the separated out section
-          surround = { separator = "left", color = { main = "blank_bg", right = "file_info_bg" } },
+          surround = { separator = "left", color = { main = status.hl.mode_bg(), right = "file_info_bg" } },
         },
         -- we want an empty space here so we can use the component builder to make a new section with just an empty string
         -- add a section for the currently opened file information
@@ -151,9 +163,17 @@ return {
           surface2 = "#505469",
           surface1 = "#3e4255",
           surface0 = "#2c2f40",
-          base = "#1a1c2a",
-          mantle = "#141620",
-          crust = "#0e0f16",
+          -- base = "#1a1c2a",
+          -- mantle = "#141620",
+          -- crust = "#0e0f16",
+
+          -- base = "#000000",
+					-- mantle = "#000000",
+					-- crust = "#000000",
+          
+          base = "#161616",
+          mantle = "#0b0b0b",
+          crust = "#000000"
         },
       },
       transparent_background = false,
@@ -174,39 +194,9 @@ return {
   },
   {
     "folke/tokyonight.nvim",
+    lazy = false,
     priority = 1000,
-    config = function()
-      local bg = "#011628"
-      local bg_dark = "#011423"
-      local bg_highlight = "#143652"
-      local bg_search = "#0A64AC"
-      local bg_visual = "#275378"
-      local fg = "#CBE0F0"
-      local fg_dark = "#B4D0E9"
-      local fg_gutter = "#627E97"
-      local border = "#547998"
-
-      require("tokyonight").setup({
-        style = "night",
-        on_colors = function(colors)
-          colors.bg = bg
-          colors.bg_dark = bg_dark
-          colors.bg_float = bg_dark
-          colors.bg_highlight = bg_highlight
-          colors.bg_popup = bg_dark
-          colors.bg_search = bg_search
-          colors.bg_sidebar = bg_dark
-          colors.bg_statusline = bg_dark
-          colors.bg_visual = bg_visual
-          colors.border = border
-          colors.fg = fg
-          colors.fg_dark = fg_dark
-          colors.fg_float = fg
-          colors.fg_gutter = fg_gutter
-          colors.fg_sidebar = fg_dark
-        end
-      })
-    end
+    opts = {},
   },
   {
     "karb94/neoscroll.nvim",
